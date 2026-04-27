@@ -1,0 +1,671 @@
+<!--
+    ╔══════════════════════════════════════════════════════════════╗
+    ║  DH SUSTAINABILITY – TEIL B: PRAXIS                         ║
+    ║  Präsentation zur Oxford Case Study                         ║
+    ║  Quelle: Strange, Gooch & Collinson (2023)                  ║
+    ║  DOI: 10.1080/14794713.2023.2206286                         ║
+    ║                                                              ║
+    ║  FOLIENÜBERSICHT:                                           ║
+    ║  Titelfolie  .slide-container.transition-slide              ║
+    ║  Folie  7    #slide7-bridge  Brückenfolie Entstehung SDS    ║
+    ║  Folie  8    #slide8         Oxford SDS Service             ║
+    ║  Folie  9                    SaaS vs. Eigenbau              ║
+    ║  Folie 10                    Suitability Assessment         ║
+    ║  Folie 11                    Sustainability by Design       ║
+    ║  Folie 12                    Fallstudie Grave Goods         ║
+    ║  Folie 13    .transition-slide  Schlussfolie                ║
+    ╚══════════════════════════════════════════════════════════════╝
+-->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DH Sustainability - Teil B: Praxis</title>
+    <!-- Schriftarten: Merriweather (Serif) für Überschriften, Open Sans (Sans-serif) für Fließtext -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 Free: Icon-Bibliothek für alle <i class="fa-solid fa-..."> Elemente -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* ── DESIGN-TOKEN: Oxford Corporate Identity ──────────────────
+           Zentrale Farbdefinitionen als CSS Custom Properties.
+           Verwendung im gesamten Dokument via var(--name).
+           --oxford-blue  #002147  Dunkelblau  → Überschriften, Akzente, Hintergründe
+           --cream        #fdfcf0  Cremeweiß   → Folienhintergrund
+           --accent-gold  #c4a006  Oxford-Gold → Trennlinien, Highlights, Badges
+           --text-dark    #1a1a1a  Fast-Schwarz → Haupttext
+           --text-gray    #4a4a4a  Mittelgrau  → Nebentext, Footer, Bildunterschriften
+        ─────────────────────────────────────────────────────────── */
+        :root {
+            --oxford-blue: #002147;
+            --cream: #fdfcf0;
+            --accent-gold: #c4a006;
+            --text-dark: #1a1a1a;
+            --text-gray: #4a4a4a;
+        }
+
+        /* ── RESET: Entfernt browser-spezifische Abstände.
+           box-sizing: border-box → padding/border in Breite/Höhe eingerechnet. */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        /* ── BODY: Grauer Hintergrund als "Bühne". Grid zentriert alle Folien. */
+        body { background-color: #cbd5e1; display: grid; gap: 40px; place-items: center; padding: 40px 0; }
+
+        /* ── .slide-container: BASISKLASSE ALLER FOLIEN ───────────────
+           Feste Größe 1280×720px = 16:9-Format (Full-HD-Projektor).
+           display:flex + flex-direction:column → h2 oben, .content-area
+           Mitte (flex-grow:1), .footer unten.
+           position:relative → ermöglicht absolute Positionierung des .footer.
+           overflow:hidden → verhindert Überlauf aus der Folie.
+        ─────────────────────────────────────────────────────────── */
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: var(--cream);
+            color: var(--text-dark);
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border: 1px solid #999;
+            margin-bottom: 50px;
+        }
+
+        /* ── h2: FOLIENÜBERSCHRIFT ─────────────────────────────────────
+           Merriweather Serif für akademischen Charakter.
+           border-bottom in accent-gold = Oxford-Trennlinie.
+           Wird von .transition-slide h2 überschrieben (keine Linie, gold).
+        ─────────────────────────────────────────────────────────── */
+        h2 { font-family: 'Merriweather', serif; color: var(--oxford-blue); font-size: 48px; border-bottom: 3px solid var(--accent-gold); padding-bottom: 15px; margin-bottom: 40px; }
+        
+        /* ── .content-area: HAUPTINHALTBEREICH ────────────────────────
+           flex-grow:1 → nimmt gesamten Raum zwischen h2 und .footer.
+           justify-content:center → zentriert Inhalt vertikal.
+           z-index:1 → liegt über etwaigen Hintergrundelementen.
+        ─────────────────────────────────────────────────────────── */
+        .content-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 1; }
+
+        /* ── .two-column: ZWEISPALTIGES RASTER (Text | Bild) ──────────
+           CSS Grid mit zwei gleich breiten Spalten (1fr 1fr).
+           align-items:start → Spalten beginnen oben, nicht gestreckt.
+        ─────────────────────────────────────────────────────────── */
+        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+        
+        /* ── .image-box: BILDPLATZHALTER ──────────────────────────────
+           Hellblau-grauer Hintergrund (#e2e8f0) mit weißem Rahmen
+           (border:10px solid white) → wirkt wie ein gerahmtes Bild.
+           .image-box i → das Font Awesome Icon darin: 150px, opacity:0.7.
+        ─────────────────────────────────────────────────────────── */
+        .image-box { 
+            width: 100%; 
+            height: 400px; 
+            background: #e2e8f0; 
+            border: 10px solid white; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+        .image-box i { font-size: 150px; color: var(--oxford-blue); opacity: 0.7; }
+
+        /* ── .bullet-list: AUFZÄHLUNG MIT PFEIL-ICON ──────────────────
+           list-style:none → entfernt Standard-Listenpunkte.
+           padding-left:45px → Platz für das ::before Pfeil-Icon.
+           ::before → injiziert Font Awesome chevron-right (f054) in gold.
+           font-weight:900 = Pflicht für Font Awesome Solid-Stil.
+           Standardwert margin-bottom:25px wird auf einzelnen Folien
+           inline überschrieben (z.B. Folie 9: 14px, Folie 12: 12px),
+           um Platz für nachfolgende Elemente zu schaffen.
+        ─────────────────────────────────────────────────────────── */
+        .bullet-list { list-style: none; }
+        .bullet-list li { position: relative; padding-left: 45px; margin-bottom: 25px; font-size: 26px; line-height: 1.4; color: var(--text-dark); }
+        .bullet-list li::before { 
+            content: "\f054"; 
+            font-family: "Font Awesome 6 Free"; 
+            font-weight: 900; 
+            position: absolute; 
+            left: 0; 
+            top: 5px;
+            color: var(--accent-gold); 
+        }
+
+        /* ── .highlight: INLINE-HERVORHEBUNG ─────────────────────────
+           Verwendung: <span class="highlight">Begriff</span>
+           Setzt Text in Oxford-Blau, fett.
+        ─────────────────────────────────────────────────────────── */
+        .highlight { color: var(--oxford-blue); font-weight: 700; }
+
+        /* ── .footer: FOLIEN-FUSSZEILE ────────────────────────────────
+           position:absolute relativ zur .slide-container.
+           Thema links, Foliennummer rechts (space-between).
+           border-top = dezente Trennlinie über der Fußzeile.
+        ─────────────────────────────────────────────────────────── */
+        .footer { position: absolute; bottom: 30px; left: 60px; right: 60px; display: flex; justify-content: space-between; font-size: 16px; color: var(--text-gray); border-top: 1px solid #ddd; padding-top: 10px; }
+
+        /* ── .transition-slide: ÜBERGANGSFOLIEN (Titel + Schluss) ─────
+           Modifier-Klasse, kombiniert mit .slide-container.
+           Kehrt Farbschema um: oxford-blue Hintergrund, weißer Text.
+           Überschreibt h2 (gold, keine Linie) und p (weiß, kursiv).
+        ─────────────────────────────────────────────────────────── */
+        .transition-slide { background-color: var(--oxford-blue); color: white; justify-content: center; text-align: center; }
+        .transition-slide h2 { color: var(--accent-gold); border: none; font-size: 60px; }
+        .transition-slide p { font-size: 32px; font-style: italic; margin-top: 30px; opacity: 0.9; }
+
+        /* ── .grid-4 + .tile: KACHEL-RASTER ──────────────────────────
+           .grid-4: 2×2 CSS Grid (Name "grid-4" = vier Kacheln).
+           .tile: einzelne Inhaltskachel, weißer Hintergrund,
+           goldener linker Rand (8px), leichter Schatten.
+           Auf Folie 10 werden .tile-Instanzen inline verkleinert
+           (padding/font-size), da 7 Kacheln Platz brauchen.
+        ─────────────────────────────────────────────────────────── */
+        .grid-4 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .tile { background: white; padding: 25px; border-radius: 8px; border-left: 8px solid var(--accent-gold); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .tile h4 { color: var(--oxford-blue); font-size: 24px; margin-bottom: 10px; }
+        .tile p { font-size: 18px; }
+
+        /* NEU: Timeline-Stil für Folie 7b */
+        /* ── .timeline + .timeline-item + .timeline-dot + .timeline-content ─
+           Vertikaler Zeitstrahl auf Folie 7 (Brückenfolie).
+           .timeline-dot: runder Marker (36×36px) in oxford-blue.
+           flex-shrink:0 → Dot schrumpft nie, auch bei langem Text.
+           Letzter Dot hat inline-Stil: gold statt blau = Zielpunkt.
+        ─────────────────────────────────────────────────────────── */
+        .timeline { display: flex; flex-direction: column; gap: 12px; }
+        .timeline-item { display: flex; align-items: flex-start; gap: 18px; }
+        .timeline-dot { 
+            width: 36px; height: 36px; border-radius: 50%; 
+            background: var(--oxford-blue); color: white;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; font-weight: 700; flex-shrink: 0; margin-top: 2px;
+        }
+        .timeline-content h4 { font-size: 18px; color: var(--oxford-blue); font-weight: 700; margin-bottom: 2px; }
+        .timeline-content p { font-size: 15px; color: var(--text-gray); line-height: 1.4; }
+
+        /* NEU: Zwei-Spalten Legacy vs. Neu */
+        /* ── .compare-grid + .compare-col + Modifier (.legacy / .new-proj) ─
+           Zweispaltige Vergleichsdarstellung auf Folie 11.
+           .compare-col.legacy   → dunkelrot  #8b3a3a (Warnsignal)
+           .compare-col.new-proj → dunkelgrün #2a6e3f (positiv)
+           ul li::before → einfaches › Zeichen statt Font Awesome.
+        ─────────────────────────────────────────────────────────── */
+        .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .compare-col { background: white; border-radius: 8px; padding: 20px 25px; box-shadow: 0 2px 5px rgba(0,0,0,0.08); }
+        .compare-col h4 { font-size: 20px; font-weight: 700; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 3px solid var(--accent-gold); }
+        .compare-col.legacy h4 { color: #8b3a3a; }
+        .compare-col.new-proj h4 { color: #2a6e3f; }
+        .compare-col ul { list-style: none; }
+        .compare-col ul li { font-size: 16px; line-height: 1.5; padding: 5px 0 5px 22px; position: relative; color: var(--text-dark); }
+        .compare-col ul li::before { content: "›"; position: absolute; left: 0; color: var(--accent-gold); font-weight: 700; font-size: 18px; }
+
+        /* NEU: Kosten-Badge */
+        /* ── .cost-badge: TCO-KOSTENVORTEIL BADGE (Folie 9) ───────────
+           Dunkelblaues Pill-Element, das den Kostenwert (10–20 %)
+           prominent hervorhebt. .cost-badge span → Zahlenwert in gold,
+           größer (30px) für maximale visuelle Wirkung.
+           margin-top:20px wird auf Folie 9 inline auf 14px reduziert,
+           damit der Badge vollständig im 720px-Folienrahmen bleibt.
+        ─────────────────────────────────────────────────────────── */
+        .cost-badge {
+            background: var(--oxford-blue);
+            color: white;
+            border-radius: 12px;
+            padding: 18px 28px;
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .cost-badge span { color: var(--accent-gold); font-size: 30px; }
+
+        /* NEU: Zitat-Box */
+        /* ── .quote-box: ZITATBLOCK (Folie 12: Hamerow-Zitat) ─────────
+           Heller goldener Hintergrund (rgba 8% Deckkraft) mit
+           kräftigem goldenem linken Rand → klassische Zitatform.
+           border-radius:0 8px 8px 0 → links eckig, rechts gerundet.
+           .quote-box cite → Quellenangabe: nicht kursiv, oxford-blue.
+        ─────────────────────────────────────────────────────────── */
+        .quote-box {
+            background: rgba(196,160,6,0.08);
+            border-left: 5px solid var(--accent-gold);
+            padding: 16px 20px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 18px;
+            font-size: 17px;
+            font-style: italic;
+            color: var(--text-gray);
+            line-height: 1.5;
+        }
+        .quote-box cite { display: block; margin-top: 8px; font-style: normal; font-size: 14px; color: var(--oxford-blue); font-weight: 600; }
+
+        /* NEU: Spider-Chart-Platzhalter mit Labels */
+        /* ── .spider-container + .spider-label-list ───────────────────
+           Platzhalter für das Spinnendiagramm (Folie 10).
+           .spider-label-list → listet die 7 Bewertungsachsen mit
+           kleinen goldenen Strichen (::before) als Marker auf.
+        ─────────────────────────────────────────────────────────── */
+        .spider-container { 
+            position: relative; width: 100%; height: 360px;
+            display: flex; align-items: center; justify-content: center;
+            background: #f8f8f8; border-radius: 8px;
+        }
+        .spider-label-list { list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 14px; color: var(--text-gray); }
+        .spider-label-list li { display: flex; align-items: center; gap: 10px; }
+        .spider-label-list li::before { content: ""; display: inline-block; width: 14px; height: 3px; background: var(--accent-gold); border-radius: 2px; }
+
+        /* NEU: Open-Access-Badge */
+        /* ── .oa-badge: OPEN-ACCESS-KENNZEICHNUNG (Folie 13) ──────────
+           Grüner Badge für CC BY 4.0 Lizenzhinweis.
+           Farben: #f0faf4 (Hintergrund) / #4caf50 (Rand) / #2e7d32 (Text)
+           → konventionelle Open-Access-Signalfarben.
+        ─────────────────────────────────────────────────────────── */
+        .oa-badge { 
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #f0faf4; border: 1px solid #4caf50; 
+            border-radius: 20px; padding: 6px 14px; font-size: 13px; color: #2e7d32; font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     TITELFOLIE
+     Klassen: .slide-container (Basis) + .transition-slide (dunkles
+     Farbschema: oxford-blue Hintergrund, gold h2, weißer Text).
+     Kein .footer — Titelfolie hat keine Seitenzahl.
+═══════════════════════════════════════════════════════ -->
+<div class="slide-container transition-slide">
+    <!-- h2: von .transition-slide h2 in gold, ohne Trennlinie überschrieben -->
+    <h2>Vom digitalen Darwinismus zur kontrollierten Evolution</h2>
+    <!-- p: von .transition-slide p in weiß, kursiv überschrieben -->
+    <p>„Wer seine Daten liebt, der pflegt sie – oder schaut dabei zu, wie sie im digitalen Nirwana erodieren."</p>
+    <!-- Inline-gestylter Badge mit Teil-Bezeichnung, goldener Rahmen -->
+    <div style="margin-top: 50px; border: 2px solid var(--accent-gold); display: inline-block; padding: 15px 30px; font-size: 22px;">TEIL B: Die Oxford Case Study</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     FOLIE 7 — NEU: Brückenfolie „Wie entstand SDS?"
+     Klassen: .slide-container | ID: #slide7-bridge
+     Layout: .two-column (1fr 1fr)
+     Links:  .timeline mit 4 .timeline-item Einträgen
+     Rechts: 3 inline-gestylte Info-Boxen (kein eigener Klassenname,
+             da diese Boxen nur hier vorkommen)
+═══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide7-bridge">
+    <!-- h2: font-size inline auf 40px reduziert (mehr Platz für Timeline) -->
+    <h2 style="font-size:40px; margin-bottom: 28px;">Wie entstand SDS? — Der Weg zur Lösung</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <!-- LINKE SPALTE: Zeitstrahl (.timeline) -->
+            <div class="timeline">
+                <!-- .timeline-item: ein Ereignis = .timeline-dot (Nummer) + .timeline-content (Text) -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">1</div>
+                    <div class="timeline-content">
+                        <h4>DHARMa-Projekt (2013–14)</h4>
+                        <p>Forschergeführte Evidenzbasis: bisherige Praxis der DH-Datensicherung muss grundlegend überdacht werden.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">2</div>
+                    <div class="timeline-content">
+                        <h4>DHS-Projekt gestartet (2017)</h4>
+                        <p>Institutionelles IT-Projekt nach PRINCE2-Methodik. Bestandsaufnahme: <strong>47 Pilotprojekte</strong> identifiziert, die Warm-Data-Unterstützung benötigen.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">3</div>
+                    <div class="timeline-content">
+                        <h4>Agile Wende (Anfang 2020)</h4>
+                        <p>Projektleitung wechselt von IT-Services zur Humanities Division. Umstieg auf agiles Projektmanagement; Forscher rücken ins Zentrum.</p>
+                    </div>
+                </div>
+                <!-- Letzter Dot: gold statt oxford-blue = visueller Zielpunkt der Timeline -->
+                <div class="timeline-item">
+                    <div class="timeline-dot" style="background: var(--accent-gold); color: var(--oxford-blue);">4</div>
+                    <div class="timeline-content">
+                        <h4>Launch SDS-Dienst (Februar 2021)</h4>
+                        <p>Sowohl technische Plattform als auch Beratungsdienst — für bestehende und neue DH-Projekte in Oxford.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RECHTE SPALTE: 3 Info-Boxen als Flexbox-Spalte -->
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                <!-- Box 1: Icon + Text zu den 400+ Anforderungen (grauer Hintergrund = neutral) -->
+                <div style="background: #f4f4f4; border-radius: 10px; padding: 25px; text-align: center;">
+                    <i class="fa-solid fa-magnifying-glass-chart" style="font-size: 80px; color: var(--oxford-blue); opacity: 0.7;"></i>
+                    <p style="font-size: 15px; color: var(--text-gray); margin-top: 15px; font-style: italic;">Community-Konsultationen: <strong style="color: var(--oxford-blue);">400+ Anforderungen</strong> gesammelt → auf 109 verfeinert → MoSCoW-Priorisierung</p>
+                </div>
+                <!-- Box 2: Warm-Data-Definition (goldener linker Rand = Akzent/Hervorhebung) -->
+                <div style="background: white; border-radius: 8px; padding: 18px; border-left: 5px solid var(--accent-gold); font-size: 14px;">
+                    <p><i class="fa-solid fa-circle-info" style="color: var(--accent-gold); margin-right: 8px;"></i><strong>Warm Data:</strong> Datensätze, die weder aktiv in Forschung noch endgültig archiviert sind — der institutionelle Blindspot, den SDS schließt.</p>
+                </div>
+                <!-- Box 3: Hinweis auf Kollegin (grauer Rand = sekundäre/neutrale Info) -->
+                <div style="background: white; border-radius: 8px; padding: 15px; border-left: 5px solid #999; font-size: 13px; color: var(--text-gray);">
+                    <p><i class="fa-solid fa-link" style="margin-right: 6px;"></i>Meine Kollegin hat Teil A (Theorie &amp; Warm-Data-Konzept) bereits vorgestellt.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer"><span>Vorgeschichte &amp; Entstehung SDS</span><span>Folie 7</span></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     FOLIE 8 (ehemals Folie 7) — Oxford SDS Service
+     Klassen: .slide-container | ID: #slide8
+     Layout: .two-column (1fr 1fr)
+     Links:  3 Merkmals-Karten (inline-gestylt, unterschiedliche
+             Randfarben: #666 / #999 / #444 als Intensitätsstufung)
+             + Ressourcen-Box mit externen Links
+     Rechts: .image-box (fa-university Icon) + Bildunterschrift
+═══════════════════════════════════════════════════════ -->
+<div class="slide-container" id="slide8">
+    <h2 class="slide-title">Der Oxford SDS Service</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <!-- LINKE SPALTE: Merkmals-Karten als Flexbox-Spalte -->
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <!-- Karte 1: grauer Rand #666 (mittlere Intensität) -->
+                <div style="background: white; padding: 12px 15px; border-left: 5px solid #666; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                    <h3 style="font-size: 18px; color: #333; margin-bottom: 3px;">
+                        <i class="fa-solid fa-graduation-cap"></i> Akademische Führung
+                    </h3>
+                    <p style="font-size: 15px; line-height: 1.3; color: #444;">Datenhoheit zurück in der Geisteswissenschaft.</p>
+                </div>
+                <!-- Karte 2: hellgrauer Rand #999 (geringste Intensität) -->
+                <div style="background: white; padding: 12px 15px; border-left: 5px solid #999; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                    <h3 style="font-size: 18px; color: #333; margin-bottom: 3px;">
+                        <i class="fa-solid fa-bolt"></i> Agiles Framework
+                    </h3>
+                    <p style="font-size: 15px; line-height: 1.3; color: #444;">Schnelle Sprints statt starrer Bürokratie.</p>
+                </div>
+                <!-- Karte 3: dunkelgrauer Rand #444 + grauer Hintergrund = stärkste Hervorhebung -->
+                <div style="background: #efefef; color: #333; padding: 12px 15px; border-left: 5px solid #444; border-radius: 4px;">
+                    <h3 style="font-size: 18px; color: #000; margin-bottom: 3px;">
+                        <i class="fa-solid fa-users-viewfinder"></i> User-Driven Design
+                    </h3>
+                    <p style="font-size: 15px; line-height: 1.3;"><strong>400+ Anforderungen</strong> → MoSCoW → 109 Kernfunktionen.</p>
+                </div>
+                <!-- Ressourcen-Box: externe Links zur SDS-Website -->
+                <div style="background-color: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid #ddd; margin-top: 5px;">
+                    <h4 style="color: #555; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; font-weight: 700;">Zentrale Ressourcen</h4>
+                    <div style="font-size: 12px; line-height: 1.4;">
+                        <p style="margin-bottom: 6px;"><i class="fa-solid fa-circle-question" style="color: #888;"></i> <a href="https://www.sds.ox.ac.uk/sustainable-digital-scholarship" target="_blank" style="color: #002147; font-weight: bold;">Was ist SDS? (Übersicht)</a></p>
+                        <p style="margin-bottom: 6px;"><i class="fa-solid fa-magnifying-glass-chart" style="color: #888;"></i> <a href="https://portal.sds.ox.ac.uk/" target="_blank" style="color: #002147; font-weight: bold;">SDS Daten-Portal (Discovery)</a></p>
+                        <p><i class="fa-solid fa-house-chimney" style="color: #888;"></i> <a href="https://www.sds.ox.ac.uk/" target="_blank" style="color: #002147; font-weight: bold;">SDS Service-Startseite</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RECHTE SPALTE: .image-box + Bildunterschrift -->
+            <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                <!-- .image-box: height/background/border-radius inline überschrieben -->
+                <div class="image-box" style="height: 380px; width: 100%; display: flex; justify-content: center; align-items: center; background: #f4f4f4; border-radius: 12px;">
+                    <i class="fa-solid fa-university" style="font-size: 180px; color: var(--oxford-blue); opacity: 0.7;"></i>
+                </div>
+                <p style="font-size: 14px; font-style: italic; color: #777; margin-top: 15px; text-align: center; max-width: 80%;">
+                    SDS ist <em>zweigleisig</em>: technische Plattform (Figshare) <strong>und</strong> Beratungsdienst für Forschungsdaten.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="footer"><span>Oxford SDS Service</span><span>Folie 8</span></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     FOLIE 9 — SaaS vs. Eigenbau (mit TCO-Badge)
+     Klassen: .slide-container
+     Layout: .two-column (1fr 1fr)
+     Links:  Einleitungssatz + .bullet-list + .cost-badge
+     Rechts: .image-box (fa-cloud-arrow-up)
+     Hinweis: .bullet-list li haben hier margin-bottom:14px
+     (statt CSS-Standard 25px) und letztes li margin-bottom:0,
+     damit .cost-badge vollständig im 720px-Rahmen sichtbar bleibt.
+═══════════════════════════════════════════════════════ -->
+<div class="slide-container">
+    <h2>SaaS vs. Eigenbau</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div>
+                <!-- .highlight: Produktname in oxford-blue fett -->
+                <p style="font-size: 26px; margin-bottom: 18px;">Warum <span class="highlight">Figshare for Institutions</span>?</p>
+                <!-- margin-bottom:0 auf ul verhindert Abstand zum .cost-badge -->
+                <ul class="bullet-list" style="margin-bottom: 0;">
+                    <!-- margin-bottom:14px (reduziert) für Platz -->
+                    <li style="margin-bottom: 14px;"><span class="highlight">Kosteneffizienz:</span> Nur 10–20&thinsp;% der Kosten einer Eigenentwicklung (TCO über 10 Jahre).</li>
+                    <li style="margin-bottom: 14px;"><span class="highlight">Wartung:</span> Technik mieten, Inhalte kuratieren.</li>
+                    <!-- margin-bottom:0 auf letztem li → Badge direkt darunter -->
+                    <li style="margin-bottom: 0;"><span class="highlight">FAIR by default:</span> Open Access &amp; FAIRness als Standardoption — DOIs und Metadaten-Standards inklusive.</li>
+                </ul>
+                <!-- .cost-badge: TCO-Wert prominent hervorgehoben; margin-top:14px (CSS-Standard 20px) -->
+                <div class="cost-badge" style="margin-top: 14px;">Kostenvorteil: <span>10–20&thinsp;%</span> ggü. Eigenentwicklung</div>
+            </div>
+            <div class="image-box"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+        </div>
+    </div>
+    <div class="footer"><span>Technologie-Strategie</span><span>Folie 9</span></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     FOLIE 10 — Suitability Factors Assessment (alle 7)
+     Klassen: .slide-container
+     Layout: .two-column (1fr 1fr)
+     Links:  Einleitungstext + inline CSS Grid 2×2 mit .tile
+             für Kriterien ①–⑥ + eine weitere .tile für ⑦
+             (alle .tile inline verkleinert: padding 14px/font 16px/14px)
+     Rechts: .image-box (fa-clipboard-check, height:300px) + 80/20-Infobox
+     Hinweis: grid-column:span 2 auf Kachel ⑦ ist hier wirkungslos
+     (Kachel liegt außerhalb des Grids), da sie als sibling auf
+     .tile-Grid-Ebene direkt nach dem Grid-div steht.
+═══════════════════════════════════════════════════════ -->
+<div class="slide-container">
+    <h2 style="font-size: 40px; margin-bottom: 28px;">Das Suitability Factors Assessment</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div>
+                <p style="font-size: 17px; margin-bottom: 18px; color: var(--text-gray);">Projekte werden anhand von <strong style="color: var(--oxford-blue);">7 Kriterien</strong> (je 0–5 Punkte) bewertet:</p>
+                <!-- Inline CSS Grid 2×2 für Kriterien ①–⑥ -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                    <!-- .tile: Standard-Klasse, inline auf kleinere Schrift/padding angepasst -->
+                    <div class="tile" style="padding: 14px 16px;">
+                        <h4 style="font-size: 16px; margin-bottom: 5px;">① Speicherplatz</h4>
+                        <p style="font-size: 14px;">Volumen der Forschungsdaten.</p>
+                    </div>
+                    <div class="tile" style="padding: 14px 16px;">
+                        <h4 style="font-size: 16px; margin-bottom: 5px;">② Frontend-Anforderungen</h4>
+                        <p style="font-size: 14px;">Komplexität der Benutzeroberfläche.</p>
+                    </div>
+                    <div class="tile" style="padding: 14px 16px;">
+                        <h4 style="font-size: 16px; margin-bottom: 5px;">③ Daten-Komplexität</h4>
+                        <p style="font-size: 14px;">Überlebt die Struktur ohne Spezial-Software?</p>
+                    </div>
+                    <div class="tile" style="padding: 14px 16px;">
+                        <h4 style="font-size: 16px; margin-bottom: 5px;">④ Systemintegration</h4>
+                        <p style="font-size: 14px;">Abhängigkeit von anderen Systemen.</p>
+                    </div>
+                    <div class="tile" style="padding: 14px 16px;">
+                        <h4 style="font-size: 16px; margin-bottom: 5px;">⑤ Migrations-Aufwand</h4>
+                        <p style="font-size: 14px;">Zeitaufwand vs. wissenschaftlicher Mehrwert.</p>
+                    </div>
+                    <div class="tile" style="padding: 14px 16px;">
+                        <h4 style="font-size: 16px; margin-bottom: 5px;">⑥ Dringlichkeit</h4>
+                        <p style="font-size: 14px;">Wie unmittelbar ist der Datenverlust?</p>
+                    </div>
+                </div>
+                <!-- Kriterium ⑦: direkt nach dem Grid-div, volle Breite durch margin-top -->
+                <div class="tile" style="padding: 12px 16px; margin-top: 12px; grid-column: span 2;">
+                    <h4 style="font-size: 16px; margin-bottom: 4px;">⑦ Motivation &amp; Kompromissbereitschaft</h4>
+                    <p style="font-size: 14px;">Bereitschaft zur Standardisierung — entscheidend für den Migrationserfolg.</p>
+                </div>
+            </div>
+            <!-- RECHTE SPALTE: .image-box (height:300px) + 80/20-Infobox -->
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 18px;">
+                <div class="image-box" style="height: 300px;">
+                    <i class="fa-solid fa-clipboard-check"></i>
+                </div>
+                <!-- 80/20-Infobox: hellblauer Hintergrund (#f0f4fa), kein eigener Klassenname -->
+                <div style="background: #f0f4fa; border-radius: 8px; padding: 16px; font-size: 14px; color: var(--text-gray); width: 100%;">
+                    <p><strong style="color: var(--oxford-blue);">80/20-Regel:</strong> SDS zielt darauf ab, 80&thinsp;% der DH-Projekte mit einheitlicher Infrastruktur zu bedienen — 20&thinsp;% erfordern maßgeschneiderte Lösungen.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer"><span>Prüfprozesse</span><span>Folie 10</span></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     FOLIE 11 — Sustainability by Design (Neu vs. Legacy)
+     Klassen: .slide-container
+     Layout: .two-column (align-items:start, gap:40px)
+     Links:  .compare-grid (weiteres Grid 1fr 1fr, gap:18px)
+             mit .compare-col.new-proj (grüner Titel) und
+             .compare-col.legacy (roter Titel)
+     Rechts: .image-box (fa-broom, height:250px) + Infobox
+═══════════════════════════════════════════════════════ -->
+<div class="slide-container">
+    <h2>Sustainability by Design</h2>
+    <div class="content-area">
+        <!-- align-items:start → Spalten beginnen oben, nicht vertikal gestreckt -->
+        <div class="two-column" style="align-items: start; gap: 40px;">
+            <!-- LINKE SPALTE: .compare-grid mit zwei .compare-col -->
+            <div class="compare-grid" style="grid-template-columns: 1fr 1fr; display: grid; gap: 18px;">
+                <!-- .new-proj: Überschrift grün (#2a6e3f) = positives Signal -->
+                <div class="compare-col new-proj">
+                    <h4><i class="fa-solid fa-seedling" style="margin-right: 8px;"></i>Neue Projekte</h4>
+                    <!-- ul/li: nutzen .compare-col ul li::before (›-Pfeil in gold) -->
+                    <ul>
+                        <li>Frühe Beratung: Planung vor dem ersten Förder-Euro.</li>
+                        <li>Daten werden von Beginn an SDS-kompatibel erfasst.</li>
+                        <li>Kein Data Wrangling nötig — direkter Ingest.</li>
+                        <li>Offene Web-Formate als Standard.</li>
+                    </ul>
+                </div>
+                <!-- .legacy: Überschrift dunkelrot (#8b3a3a) = Warnsignal -->
+                <div class="compare-col legacy">
+                    <h4><i class="fa-solid fa-database" style="margin-right: 8px;"></i>Legacy-Projekte</h4>
+                    <ul>
+                        <li>Oft langwierige Datenbereinigung (Data Wrangling).</li>
+                        <li>Reibungsverluste durch Bindung an alte Systeme.</li>
+                        <li>Manche Projekte zu komplex — SDS nicht geeignet.</li>
+                        <li>Migrationsprozess wird dokumentiert &amp; protokolliert.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- RECHTE SPALTE: .image-box + Batch-Migration Infobox -->
+            <div style="display: flex; flex-direction: column; justify-content: center; gap: 20px;">
+                <!-- fa-broom: Besen → passend für Data Wrangling / Bereinigung -->
+                <div class="image-box" style="height: 250px;"><i class="fa-solid fa-broom"></i></div>
+                <!-- Infobox: goldener linker Rand = Akzent -->
+                <div style="background: white; border-radius: 8px; padding: 16px; border-left: 5px solid var(--accent-gold); font-size: 14px; color: var(--text-gray);">
+                    <p><strong style="color: var(--oxford-blue);">Batch-Migration:</strong> Figshare-Tool ermöglicht den Import von Hunderten von Datensätzen per Metadaten-Tabelle — in wenigen Minuten.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer"><span>Prozessmodell</span><span>Folie 11</span></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     FOLIE 12 — Fallstudie: Grave Goods (mit Hamerow-Zitat)
+     Klassen: .slide-container
+     Layout: .two-column (1fr 1fr)
+     Links:  Projekttitel + .bullet-list (margin-bottom:12px
+             statt Standard 25px, damit .quote-box sichtbar bleibt)
+             + .quote-box mit verifiziertem Hamerow-Zitat
+             (Strange et al. 2023, S. 364, Fn. 50)
+     Rechts: .image-box (fa-vial-circle-check)
+═══════════════════════════════════════════════════════ -->
+<div class="slide-container">
+    <h2>Fallstudie: Grave Goods</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div>
+                <p style="font-size: 24px; margin-bottom: 14px;"><strong>Novum Inventorium Sepulchrale</strong></p>
+                <ul class="bullet-list">
+                    <!-- margin-bottom:12px (reduziert) → Platz für .quote-box -->
+                    <li style="margin-bottom: 12px;">Datenbank seit 2018 offline; nur zwei Metadaten-Tabellen verblieben.</li>
+                    <li style="margin-bottom: 12px;">4.800 Datensätze &amp; über 6.000 Bilddateien.</li>
+                    <li style="margin-bottom: 12px;"><span class="highlight">Ergebnis:</span> Vollständige Migration in ca. 6 Arbeitstagen (2021) — inkl. Metadaten-Bereinigung mit Prof. Helena Hamerow (School of Archaeology).</li>
+                </ul>
+                <!-- .quote-box: verifiziertes Direktzitat; cite in oxford-blue/fett -->
+                <div class="quote-box">
+                    „Eine wertvolle, webbasierte archäologische Ressource, die vor Jahren offline gegangen war, wird nun wieder genutzt."
+                    <cite>— Prof. Helena Hamerow, School of Archaeology, University of Oxford</cite>
+                </div>
+            </div>
+            <!-- fa-vial-circle-check: Reagenzglas mit Häkchen = Forschungserfolg -->
+            <div class="image-box"><i class="fa-solid fa-vial-circle-check"></i></div>
+        </div>
+    </div>
+    <div class="footer"><span>Praxisbeispiel</span><span>Folie 12</span></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     FOLIE 13 (ehemals 12) — Schlussfolie (mit OA-Badge)
+     Klassen: .slide-container + .transition-slide | ID: #slide13
+     justify-content:center → Inhalt vertikal zentriert.
+     padding:50px 60px 70px 60px → größeres padding-bottom (70px)
+     schafft Abstand zum absolut positionierten Footer-Div,
+     sodass Referenzbox und Footer sich nicht überschneiden.
+     Referenzbox: max-width:1050px, margin:0 auto → zentriert.
+     .oa-badge: grüner Open-Access-Hinweis (CC BY 4.0).
+     Footer-Div: position:absolute, left/right:60px (bündig
+     mit Folien-Padding, nicht 0px).
+═══════════════════════════════════════════════════════ -->
+<div class="slide-container transition-slide" id="slide13" style="display: flex; flex-direction: column; padding: 50px 60px 70px 60px; justify-content: center;">
+    
+    <!-- Zentrierter Danke-Block: h2 (gold, keine Linie) + p (weiß, kursiv) + hr -->
+    <div style="margin-bottom: 24px; text-align: center;">
+        <h2 style="font-size: 52px; border: none; margin-bottom: 5px; color: var(--accent-gold); font-family: 'Merriweather';">
+            Vielen Dank!
+        </h2>
+        <p style="font-size: 26px; font-style: italic; color: #fdfcf0; opacity: 0.9;">
+            Fragen &amp; Diskussion
+        </p>
+        <hr style="width: 60px; border: 2px solid var(--accent-gold); margin: 16px auto 0 auto;">
+    </div>
+
+    <!-- Referenzbox: halbtransparenter schwarzer Hintergrund + goldener Rand -->
+    <div style="background: rgba(0, 0, 0, 0.3); border-radius: 8px; padding: 20px; border: 1px solid rgba(196, 160, 6, 0.4); text-align: left; max-width: 1050px; margin: 0 auto; width: 95%;">
+        <h4 style="color: var(--accent-gold); font-size: 13px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; font-family: 'Open Sans'; font-weight: 700; opacity: 0.8;">
+            Referenzen &amp; Lizenzen
+        </h4>
+        
+        <div style="font-size: 13px; line-height: 1.4; color: #fdfcf0; font-family: 'Open Sans';">
+            <!-- Literaturangabe: Buch-Icon + Zitierdaten + .oa-badge -->
+            <div style="margin-bottom: 8px; display: flex; align-items: flex-start;">
+                <i class="fa-solid fa-book-open" style="margin-top: 3px; margin-right: 12px; color: var(--accent-gold); flex-shrink: 0; font-size: 11px;"></i>
+                <p>
+                    <strong>Strange, D., Gooch, M., &amp; Collinson, A. (2023).</strong> Equality, findability, sustainability: the challenges and rewards of open digital humanities data. <em>Int. J. of Perf. Arts and Digital Media</em>, 19(3), 348–368.<br>
+                    <span style="opacity: 0.6; font-size: 11px;">DOI: 10.1080/14794713.2023.2206286 &nbsp;|&nbsp; </span>
+                    <!-- .oa-badge: Klasse aus CSS, inline-Stil verkleinert für Kontext -->
+                    <span class="oa-badge" style="font-size: 11px; padding: 3px 10px;">
+                        <i class="fa-solid fa-lock-open" style="font-size: 10px;"></i> Open Access – CC BY 4.0
+                    </span>
+                </p>
+            </div>
+            <!-- Lizenzzeile: drei Einträge, space-between -->
+            <div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; font-size: 11px; opacity: 0.7;">
+                <span><i class="fa-solid fa-building-columns" style="color: var(--accent-gold); margin-right: 5px;"></i> Oxford SDS Framework</span>
+                <span><i class="fa-solid fa-copyright" style="color: var(--accent-gold); margin-right: 5px;"></i> Icons: Font Awesome (Free)</span>
+                <span>Design: Oxford Academic</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer: absolut positioniert, left/right:60px (= Folien-Padding) -->
+    <div style="position: absolute; bottom: 25px; left: 60px; right: 60px; display: flex; justify-content: space-between; font-size: 13px; color: rgba(255,255,255,0.4);">
+        <span style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 5px;">Seminar Digital Humanities</span>
+        <span style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 5px;">Folie 13</span>
+    </div>
+</div>
+
+</body>
+</html>
