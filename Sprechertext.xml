@@ -1,0 +1,719 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-model href="https://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng"
+            type="application/xml"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="https://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng"
+            type="application/xml"
+            schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:lang="de">
+
+    <!-- ============================================================ -->
+    <!--  T E I   H E A D E R                                         -->
+    <!-- ============================================================ -->
+    <teiHeader>
+        <fileDesc>
+
+            <titleStmt>
+                <title type="main">Sprechertexte mit Belegstellen</title>
+                <title type="sub">Teil B: Die Oxford Case Study · Folien 6–12</title>
+                <respStmt>
+                    <resp>Redaktion und Ausarbeitung</resp>
+                    <name>Albert Brugnara</name>
+                    <!-- Vortragende(r) einsetzen -->
+                </respStmt>
+            </titleStmt>
+
+            <editionStmt>
+                <edition n="4.0">Version 4.0 – mit Belegstellen</edition>
+            </editionStmt>
+
+            <publicationStmt>
+                <publisher>Unveröffentlichtes Manuskript, interne Verwendung</publisher>
+                <availability status="free">
+                    <licence target="https://creativecommons.org/licenses/by/4.0/">Basierend auf
+                        Strange et al. (2023), CC BY 4.0. Der Originalartikel ist Open
+                        Access.</licence>
+                </availability>
+                <date when="2026-05-01">2026</date>
+            </publicationStmt>
+
+            <sourceDesc>
+                <!-- Primärquelle, aus der alle Belegstellen stammen -->
+                <biblStruct xml:id="strange2023">
+                    <analytic>
+                        <author>
+                            <persName>
+                                <forename>Damon</forename>
+                                <surname>Strange</surname>
+                            </persName>
+                        </author>
+                        <author>
+                            <persName>
+                                <forename>Megan</forename>
+                                <surname>Gooch</surname>
+                            </persName>
+                        </author>
+                        <author>
+                            <persName>
+                                <forename>Alwyn</forename>
+                                <surname>Collinson</surname>
+                            </persName>
+                        </author>
+                        <title level="a">Equality, findability, sustainability: challenges and
+                            benefits of open data in the Digital Humanities</title>
+                    </analytic>
+                    <monogr>
+                        <title level="j">International Journal of Performance Arts and Digital
+                            Media</title>
+                        <idno type="DOI">10.1080/14794713.2023.2206286</idno>
+                        <idno type="ISSN-print">1479-4713</idno>
+                        <idno type="ISSN-online">2040-0934</idno>
+                        <imprint>
+                            <biblScope unit="volume">19</biblScope>
+                            <biblScope unit="issue">3</biblScope>
+                            <biblScope unit="page" from="348" to="368">348–368</biblScope>
+                            <date when="2023-01-01">2023</date>
+                            <publisher>Taylor &amp; Francis (Routledge)</publisher>
+                        </imprint>
+                    </monogr>
+                    <note type="access">Open Access, CC BY 4.0</note>
+                </biblStruct>
+            </sourceDesc>
+
+        </fileDesc>
+
+        <encodingDesc>
+            <projectDesc>
+                <p>Sprechertext für einen ca. achtminütigen Vortragsteil über die Oxford Case Study
+                    (Sustainable Digital Scholarship Service). Die Belegstellen verweisen auf
+                    Seitenzahlen in <bibl corresp="#strange2023">Strange et al. (2023)</bibl>.
+                    Regieanweisungen sind mit <gi>stage</gi> kodiert, Belegstellen mit <tag>note
+                        type="citRef"</tag>. Einzelne Sätze des Sprechtexts sind als <gi>s</gi>
+                    ausgezeichnet.</p>
+            </projectDesc>
+            <editorialDecl>
+                <segmentation>
+                    <p>Jeder Folienabschnitt bildet ein <gi>div</gi> mit <att>type</att>="slide" und
+                        einer fortlaufenden <att>xml:id</att> (slide01–slide08). Timing-Angaben
+                        stehen im Attribut <att>n</att>.</p>
+                </segmentation>
+                <quotation marks="all">
+                    <p>Direkte Zitate aus dem Primärartikel stehen in <gi>q</gi>-Elementen mit
+                            <att>source</att>="#strange2023" und <att>corresp</att> für die
+                        Seitenangabe.</p>
+                </quotation>
+            </editorialDecl>
+            <refsDecl>
+                <p>Seitenzahlen in <att>corresp</att>-Attributen beziehen sich auf <ref
+                        target="#strange2023">Strange et al. (2023)</ref> und folgen dem Schema
+                        <code>strange2023:p[N]</code> bzw. <code>strange2023:p[N]-p[M]</code> für
+                    Seitenbereiche.</p>
+            </refsDecl>
+        </encodingDesc>
+
+        <profileDesc>
+            <langUsage>
+                <language ident="de">Deutsch (Sprechertext)</language>
+                <language ident="en">Englisch (Fachtermini, Zitate)</language>
+            </langUsage>
+            <textClass>
+                <keywords scheme="https://id.loc.gov/authorities/subjects">
+                    <term>Digital humanities</term>
+                    <term>Research data management</term>
+                    <term>Open access</term>
+                    <term>Digital preservation</term>
+                    <term>FAIRE</term>
+                    <term>CARE</term>
+                    <term>Oxford</term>
+                </keywords>
+            </textClass>
+        </profileDesc>
+
+        <revisionDesc>
+            <change when="2025" who="#encoder">Erstkonversion aus DOCX v4.0 in TEI P5.</change>
+        </revisionDesc>
+
+    </teiHeader>
+
+    <!-- ============================================================ -->
+    <!--  T E X T                                                      -->
+    <!-- ============================================================ -->
+    <text>
+        <body>
+
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <!--  Titelfolie / Übergang                                   -->
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <div type="slide" xml:id="slide01" n="Titelfolie – Übergang von Teil A">
+                <head>Titelfolie – Übergang von Teil A</head>
+                <note type="timing">ca. 0:30 min</note>
+
+                <sp>
+                    <speaker>Albert Brugnara</speaker>
+                    <p>
+                        <s xml:id="s01.01">Meine Kollegin hat uns in die theoretischen Grundlagen
+                            eingeführt – in das Warm-Data-Problem und in den institutionellen
+                            Kontext.</s>
+                        <s xml:id="s01.02">Ich zeige jetzt, wie die Universität Oxford konkret
+                            darauf geantwortet hat.</s>
+                        <s xml:id="s01.03">Mein Teil ist die Praxis – die Case Study aus Oxford, die
+                            Strange, Gooch und Collinson 2023 ausführlich beschreiben.</s>
+                    </p>
+                    <note type="citRef" target="#s01.01 #s01.02 #s01.03"
+                        corresp="strange2023:p348-p350"> Artikel-Einleitung, S. 348–350:
+                        Warm-Data-Konzept und Problemstellung. </note>
+                </sp>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <!--  Folie 7: Entstehungsgeschichte des SDS                 -->
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <div type="slide" xml:id="slide07" n="Folie 7 – Wie entstand der SDS-Dienst?">
+                <head>Folie 7 – Wie entstand der SDS-Dienst?</head>
+                <note type="timing">ca. 1:15 min</note>
+
+                <sp>
+                    <speaker>Albert Brugnara</speaker>
+
+                    <p>
+                        <s xml:id="s07.01">Der SDS-Dienst ist nicht aus dem Nichts entstanden – er
+                            ist das Ergebnis eines fast zehnjährigen Prozesses.</s>
+                    </p>
+
+                    <note type="citRef" target="#s07.01" corresp="strange2023:p355-p358"> S.
+                        355–358: Überblick über die Entstehungsgeschichte. </note>
+                    <p>
+                        <s xml:id="s07.02"><date from="2013" to="2014">2013–2014</date>: Das
+                            DHARMa-Projekt legte den Grundstein – eine forscher-geführte
+                            Bestandsaufnahme, die klar zeigte: die bisherigen Praktiken zur
+                            Sicherung von DH-Forschung müssen grundlegend überdacht werden.</s>
+                    </p>
+
+                    <note type="citRef" target="#s07.02" corresp="strange2023:p355"> S. 355, Abschn.
+                        „Die Herausforderungen bei der nachträglichen Integration von
+                        Nachhaltigkeit": <q source="#strange2023" corresp="strange2023:p355">DHARMa
+                            (Digital Humanities Archives for Research Materials), ein einjähriges
+                            Projekt (August 2013 bis August 2014).</q> Fn. 30. </note>
+                    <p>
+                        <s xml:id="s07.03"><date when="2017">2017</date>: Auf Basis dieser
+                            Empfehlungen startete das DHS-Projekt als institutionell verwaltetes
+                            IT-Projekt nach der PRINCE2-Methodik.</s>
+                        <s xml:id="s07.04">Eine Bestandsaufnahme identifizierte 47 Pilotprojekte,
+                            die für ein Warm-Data-Repositorium geeignet wären – Projekte in
+                            Schwierigkeiten wegen technischer Veralterung, weggefallenem Personal
+                            oder DSGVO-Risiken.</s>
+                    </p>
+
+                    <note type="citRef" target="#s07.03 #s07.04" corresp="strange2023:p354-p355"> S.
+                        354–355: <q source="#strange2023" corresp="strange2023:p355">Das DHS-Projekt
+                            [...] 2017 als institutionell verwaltetes IT-Projekt.</q> Fn. 31
+                        (PRINCE2). – S. 354: <q source="#strange2023" corresp="strange2023:p354">47
+                            Projekte, die sich als ‚Pilotprojekte' für ein Warm-Data-Repositorium
+                            eigneten.</q> Fn. 29. </note>
+                    <p>
+                        <s xml:id="s07.05">Anfang <date when="2020">2020</date> kam die
+                            entscheidende Wende: Die Humanities Division übernahm die Projektleitung
+                            von den IT-Diensten.</s>
+                        <s xml:id="s07.06">Das Motto: <q source="#strange2023"
+                                corresp="strange2023:p355">von Wissenschaftlern für
+                                Wissenschaftler.</q> Gleichzeitig wechselte man zu einem agilen
+                            Framework.</s>
+                    </p>
+
+                    <note type="citRef" target="#s07.05 #s07.06" corresp="strange2023:p355-p356"> S.
+                        355–356: <q source="#strange2023" corresp="strange2023:p355">Anfang 2020
+                            wurde beschlossen, das DHS-Projekt zu einem Projekt zu machen, das ‚von
+                            Wissenschaftlern für Wissenschaftler' durchgeführt wird.</q> Fn. 32
+                        (agil). </note>
+                    <p>
+                        <s xml:id="s07.07"><date when="2021-02">Februar 2021</date>: Launch des
+                            SDS-Dienstes – als technische Plattform und als Beratungsdienst
+                            zugleich.</s>
+                    </p>
+
+                    <note type="citRef" target="#s07.07" corresp="strange2023:p358"> S. 358: <q
+                            source="#strange2023" corresp="strange2023:p358">Dies ermöglichte es
+                            uns, den SDS-Dienst im Februar 2021 [...] zu starten.</q> Fn. 38. </note>
+                    <p>
+                        <s xml:id="s07.08">Was diese Entstehungsgeschichte methodisch auszeichnet:
+                            Aus über 400 erhobenen Anforderungen aus der Forschungscommunity wurden
+                            durch MoSCoW-Priorisierung 109 Kernanforderungen destilliert.</s>
+                        <s xml:id="s07.09">Das ist keine Bauchentscheidung, das ist systematische
+                            Anforderungsanalyse.</s>
+                    </p>
+
+                    <note type="citRef" target="#s07.08" corresp="strange2023:p356"> S. 356: <q
+                            source="#strange2023" corresp="strange2023:p356">[I]nsgesamt mehr als
+                            400 Anforderungen ermittelt. Diese Anforderungen wurden [...]
+                            verfeinert, bis 109 übrig blieben, die dann einer gründlichen
+                            MoSCoW-Priorisierung unterzogen wurden.</q> Fn. 35. </note>
+                    <stage type="direction" xml:id="regie07.01"> [Regie: MoSCoW = Must have / Should
+                        have / Could have / Won't have – Standardmethode im agilen
+                        Projektmanagement; bei Bedarf kurz erläutern.] </stage>
+
+                </sp>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <!--  Folie 8: Der Oxford SDS Service                        -->
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <div type="slide" xml:id="slide08" n="Folie 8 – Der Oxford SDS Service">
+                <head>Folie 8 – Der Oxford SDS Service</head>
+                <note type="timing">ca. 1:00 min</note>
+
+                <sp>
+                    <speaker>Vortragende/r</speaker>
+
+                    <p>
+                        <s xml:id="s08.01">Der SDS-Dienst hat drei Charakteristika, die ihn von
+                            früheren institutionellen Lösungen unterscheiden.</s>
+                    </p>
+
+                    <note type="citRef" target="#s08.01" corresp="strange2023:p356-p358"> S.
+                        356–358: Beschreibung der drei Charakteristika. </note>
+                    <p>
+                        <s xml:id="s08.02">Erstens: Akademische Führung.</s>
+                        <s xml:id="s08.03">Die Projektleitung liegt bei der Humanities Division,
+                            nicht bei zentralen IT-Diensten.</s>
+                        <s xml:id="s08.04">Das ist ungewöhnlich – und genau deshalb funktioniert
+                            es.</s>
+                        <s xml:id="s08.05">Forscher stehen im Mittelpunkt, nicht die
+                            Infrastruktur.</s>
+                    </p>
+
+                    <note type="citRef" target="#s08.02 #s08.03 #s08.04 #s08.05"
+                        corresp="strange2023:p355-p356"> S. 355–356: Wechsel der Projektleitung von
+                        IT-Diensten zur Humanities Division. </note>
+                    <p>
+                        <s xml:id="s08.06">Zweitens: Agiles Framework.</s>
+                        <s xml:id="s08.07">Einer der Kernwerte des Agile Manifesto, auf den sich die
+                            Autoren ausdrücklich beziehen, ist: Individuen und Interaktionen vor
+                            Prozessen und Werkzeugen.</s>
+                    </p>
+
+                    <note type="citRef" target="#s08.06 #s08.07" corresp="strange2023:p356"> S. 356:
+                            <q source="#strange2023" corresp="strange2023:p356">Einer der vier
+                            Hauptwerte, die das Agile Manifest beschreibt, ist die Priorisierung von
+                            ‚Individuen und Interaktionen gegenüber Prozessen und Werkzeugen'.</q>
+                        Fn. 34. </note>
+                    <p>
+                        <s xml:id="s08.08">Drittens: User-Driven Design – die 400+ Anforderungen
+                            kamen direkt aus der Forschungscommunity.</s>
+                    </p>
+
+                    <note type="citRef" target="#s08.08" corresp="strange2023:p356"> S. 356: <q
+                            source="#strange2023" corresp="strange2023:p356">Umfangreiche
+                            Konsultationen mit der Community [...] um Feedback zu System- und
+                            Funktionsanforderungen zu sammeln.</q>
+                    </note>
+                    <p>
+                        <s xml:id="s08.09">Dazu kommt eine Doppelfunktion: SDS ist einerseits
+                            technische Plattform, andererseits Beratungsdienst, der Forscher auch an
+                            andere Repositorien weiterverweist.</s>
+                        <s xml:id="s08.10">Diese Kombination war entscheidend für seinen Erfolg.</s>
+                    </p>
+
+                    <note type="citRef" target="#s08.09" corresp="strange2023:p358"> S. 358: <q
+                            source="#strange2023" corresp="strange2023:p358">Er dient sowohl als
+                            digitale Plattform für Forschungsdaten als auch als Beratungsdienst für
+                            Fragen von Forschenden zu Forschungsdaten.</q>
+                    </note>
+                    <p>
+                        <s xml:id="s08.11">Und hier ein Punkt, der im Titel des Artikels steht, aber
+                            leicht übersehen wird: Equality.</s>
+                        <s xml:id="s08.12">Die Autoren argumentieren, dass archivarische Formate –
+                            wo man erst eine ganze Datenbank herunterladen muss, um auf einzelne
+                            Objekte zuzugreifen – de facto einen Ausschluss erzeugen: Wer nicht über
+                            die nötige Technik und Bandbreite verfügt, hat keinen Zugang.</s>
+                        <s xml:id="s08.13">Offene, granulare Zugänglichkeit ist also nicht nur eine
+                            wissenschaftliche, sondern auch eine soziale Frage.</s>
+                    </p>
+
+                    <note type="citRef" target="#s08.11 #s08.12 #s08.13" corresp="strange2023:p353">
+                        S. 353: <q source="#strange2023" corresp="strange2023:p353">Der vorrangige
+                            Zugang zu einzelnen Bestandteilen von Forschungssammlungen ist nicht nur
+                            ein akademisches Anliegen, sondern auch eine Frage der
+                            gesellschaftlichen Gerechtigkeit und der Gleichberechtigung zwischen
+                            verschiedenen Gemeinschaften.</q> – Fallbeispiel African Rock Art Image
+                        Project (British Museum), S. 353. </note>
+                </sp>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <!--  Folie 9: SaaS vs. Eigenbau                            -->
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <div type="slide" xml:id="slide09" n="Folie 9 – SaaS vs. Eigenbau">
+                <head>Folie 9 – SaaS vs. Eigenbau</head>
+                <note type="timing">ca. 1:00 min</note>
+
+                <sp>
+                    <speaker>Vortragende/r</speaker>
+
+                    <p>
+                        <s xml:id="s09.01">Nachdem die Anforderungen klar waren, stellte sich die
+                            zentrale Frage: Eigenbau oder kaufen?</s>
+                        <s xml:id="s09.02">Die Antwort der Autoren ist eindeutig: SaaS – konkret
+                            Figshare for Institutions.</s>
+                    </p>
+
+                    <note type="citRef" target="#s09.01 #s09.02" corresp="strange2023:p356-p358"> S.
+                        356–358: ITT-Verfahren und Entscheidung für Figshare. Fn. 37. </note>
+                    <p>
+                        <s xml:id="s09.03">FAIR by default: Offenheit und FAIR-Konformität sind
+                            keine zusätzliche Aufgabe für Forscher – sie sind die
+                            Standardoption.</s>
+                        <s xml:id="s09.04">Wer Daten hochlädt, erhält automatisch DOIs und
+                            Metadaten-Standards.</s>
+                    </p>
+
+                    <note type="citRef" target="#s09.03 #s09.04" corresp="strange2023:p358"> S. 358:
+                            <q source="#strange2023" corresp="strange2023:p358">Dadurch werden Open
+                            Access und FAIR-Kriterien für die auf der Plattform gehosteten Daten in
+                            jedem Forschungsprojekt von vornherein gewährleistet.</q>
+                    </note>
+                    <p>
+                        <s xml:id="s09.05">Wartung: Technik mieten, Inhalte kuratieren.</s>
+                        <s xml:id="s09.06">Die eigene Energie fließt in die wissenschaftliche Pflege
+                            der Daten, nicht in Serveradministration.</s>
+                    </p>
+
+                    <note type="citRef" target="#s09.05 #s09.06" corresp="strange2023:p358"> S. 358:
+                            <q source="#strange2023" corresp="strange2023:p358">Der Vorteil dieses
+                            SaaS-Ansatzes besteht darin, dass Offenheit ebenso wie FAIRness die
+                            Standardoption ist, was bedeutet, dass Forscher diese Elemente nicht in
+                            ihre Forschung integrieren müssen.</q>
+                    </note>
+                    <p>
+                        <s xml:id="s09.07">Kosteneffizienz: Die Implementierung und Wartung von
+                            Figshare kostet nur 10 bis 20 Prozent dessen, was eine Eigenentwicklung
+                            über 10 Jahre kalkuliert hätte kosten können.</s>
+                    </p>
+
+                    <note type="citRef" target="#s09.07" corresp="strange2023:p358"> S. 358: <q
+                            source="#strange2023" corresp="strange2023:p358">Die Kosten für die
+                            Implementierung und Wartung eines SaaS-Produkts wie Figshare [betragen]
+                            nur einen Bruchteil (ca. 10–20 %) der geschätzten Kosten für die
+                            Entwicklung [...] über einen [...] Zeitraum von 10 Jahren.</q> Fn. 41. </note>
+                    <p>
+                        <s xml:id="s09.08">Die Autoren betonen dabei: Figshare ist proprietäre
+                            Software, das Risiko ist bekannt, es gibt eine explizite
+                            Ausstiegsstrategie.</s>
+                        <s xml:id="s09.09">Aber sie vergleichen es mit anderer unverzichtbarer
+                            Universitätsinfrastruktur – Bibliothekssysteme, Sammlungsverwaltung –
+                            und argumentieren: kein System ist risikolos.</s>
+                    </p>
+
+                    <note type="citRef" target="#s09.08 #s09.09" corresp="strange2023:p359"> S. 359:
+                            <q source="#strange2023" corresp="strange2023:p359">Wie bei allen
+                            Softwareentscheidungen [...] verfügen wir über eine gut ausgearbeitete
+                            ‚Ausstiegsstrategie' in unserem Risikoregister.</q> Fn. 42. </note>
+                </sp>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <!--  Folie 10: Suitability Factors Assessment              -->
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <div type="slide" xml:id="slide10" n="Folie 10 – Das Suitability Factors Assessment">
+                <head>Folie 10 – Das Suitability Factors Assessment</head>
+                <note type="timing">ca. 1:00 min</note>
+
+                <sp>
+                    <speaker>Vortragende/r</speaker>
+
+                    <p>
+                        <s xml:id="s10.01">Nicht jedes Projekt ist für SDS geeignet – das war von
+                            Anfang an klar.</s>
+                        <s xml:id="s10.02">Um das systematisch zu beurteilen, entwickelten die
+                            Autoren das Suitability Factors Assessment: sieben Kriterien auf einer
+                            Skala von 0 bis 5.</s>
+                    </p>
+
+                    <note type="citRef" target="#s10.01 #s10.02" corresp="strange2023:p361"> S. 361:
+                            <q source="#strange2023" corresp="strange2023:p361">Diese Methodik zur
+                            ‚Bewertung der Eignungsfaktoren' [...] ermöglichte es uns, die
+                            Schlüsselbereiche zu erfassen, die bei der Eignungsprüfung von
+                            Forschungsprojekten zu berücksichtigen sind.</q> Abb. 3 und 4. </note>
+                    <p>
+                        <s xml:id="s10.03">Die Kriterien sind auf der Folie vollständig – ich möchte
+                            zwei hervorheben, weil sie das Denkkader besonders gut
+                            charakterisieren.</s>
+                    </p>
+
+                    <p>
+                        <s xml:id="s10.04">Kompromissbereitschaft: Ist der Forscher bereit, auf
+                            bestimmte Funktionen zu verzichten, um Nachhaltigkeit zu gewinnen?</s>
+                        <s xml:id="s10.05">Das ist kein technisches Kriterium – das ist eine Frage
+                            der wissenschaftlichen Haltung.</s>
+                    </p>
+
+                    <note type="citRef" target="#s10.04 #s10.05" corresp="strange2023:p361"> S. 361:
+                        Kriterium „Motivation to move / Willingness to Compromise" (Abb. 4). – S.
+                        361: <q source="#strange2023" corresp="strange2023:p361">Als professionelles
+                            Support-Team gibt das SDS-Team bei dieser Bewertung kein Werturteil über
+                            die Qualität der Forschung [...] ab.</q>
+                    </note>
+                    <p>
+                        <s xml:id="s10.06">Dringlichkeit: Wie akut ist die Gefährdung des
+                            Projekts?</s>
+                        <s xml:id="s10.07">Hier kommt zum Tragen, was die Autoren den <term
+                                xml:lang="en">Scream Test</term> nennen: die lautstarke Reaktion,
+                            die Website-Betreiber erhalten, wenn eine Ressource offline geht.</s>
+                        <s xml:id="s10.08">Genau das hat viele Forscher zu SDS geführt.</s>
+                    </p>
+
+                    <note type="citRef" target="#s10.06 #s10.07 #s10.08"
+                        corresp="strange2023:p350 strange2023:p361"> S. 350: <q
+                            source="#strange2023" corresp="strange2023:p350">Der sogenannte ‚Scream
+                            Test' ist die lautstarke Reaktion, die Website-Betreiber erhalten, wenn
+                            eine Ressource offline geht [...]. Diese Reaktion hat Forscher zu uns
+                            geführt.</q> – Kriterium „Dringlichkeit" in Abb. 4, S. 361. </note>
+                    <p>
+                        <s xml:id="s10.09">Das Ergebnis: Von über 120 Projekten, die sich bis <date
+                                when="2023-01">Januar 2023</date> an SDS gewandt hatten, wurden 17
+                            als nicht kompatibel eingestuft.</s>
+                        <s xml:id="s10.10">Der häufigste Ablehnungsgrund: fehlende komplexe Abfrage-
+                            und Präsentationsfunktionen.</s>
+                    </p>
+
+                    <note type="citRef" target="#s10.09 #s10.10" corresp="strange2023:p363"> S. 363:
+                            <q source="#strange2023" corresp="strange2023:p363">Der SDS-Dienst hat
+                            bis heute (Januar 2023) mit über 120 Forschungsprojekten Kontakt
+                            aufgenommen [...]. Davon wurden 17 Projekte als nicht kompatibel [...]
+                            eingestuft.</q>
+                    </note>
+                </sp>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <!--  Folie 11: Sustainability by Design                     -->
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <div type="slide" xml:id="slide11" n="Folie 11 – Sustainability by Design">
+                <head>Folie 11 – Sustainability by Design</head>
+                <note type="timing">ca. 1:00 min</note>
+
+                <sp>
+                    <speaker>Vortragende/r</speaker>
+
+                    <p>
+                        <s xml:id="s11.01">Die Folie zeigt zwei grundlegend verschiedene
+                            Ausgangssituationen.</s>
+                    </p>
+
+                    <note type="citRef" target="#s11.01" corresp="strange2023:p359-p361"> S.
+                        359–361: Abschnittstitel <q source="#strange2023" corresp="strange2023:p359"
+                            >Ein praktischer Ansatz, um Forschung von Grund auf nachhaltig zu
+                            gestalten.</q>
+                    </note>
+                    <p>
+                        <s xml:id="s11.02">Bei neuen Projekten baut SDS die Nachhaltigkeit von
+                            Anfang an ein.</s>
+                        <s xml:id="s11.03">Datenstruktur, Metadaten-Schema, Zugangsbeschränkungen –
+                            all das wird in einer frühen Planungssitzung geklärt.</s>
+                        <s xml:id="s11.04">Forscher erfassen ihre Daten von Beginn an
+                            SDS-kompatibel.</s>
+                        <s xml:id="s11.05">Kein Data-Wrangling nötig.</s>
+                    </p>
+
+                    <note type="citRef" target="#s11.02 #s11.03 #s11.04 #s11.05"
+                        corresp="strange2023:p359-p360"> S. 359–360: <q source="#strange2023"
+                            corresp="strange2023:p359">In diesen Fällen kann der SDS-Dienst Beratung
+                            und Unterstützung anbieten [...].</q> – S. 360: <q source="#strange2023"
+                            corresp="strange2023:p360">Bei neuen Projekten benötigt das
+                            Forschungsteam diese Datenbereinigungsphase meist nicht.</q>
+                    </note>
+                    <p>
+                        <s xml:id="s11.06">Bei Legacy-Projekten ist es komplizierter.</s>
+                        <s xml:id="s11.07">Forscher haben oft Jahre in maßgeschneiderte Systeme
+                            investiert und sind an deren Funktionen gewöhnt.</s>
+                        <s xml:id="s11.08">Wenn SDS diese nicht vollständig replizieren kann, müssen
+                            sie eine schwierige Entscheidung treffen: Nachhaltigkeit gewinnen, aber
+                            Funktionen verlieren.</s>
+                    </p>
+
+                    <note type="citRef" target="#s11.06 #s11.07 #s11.08"
+                        corresp="strange2023:p360-p361"> S. 360–361: <q source="#strange2023"
+                            corresp="strange2023:p360">Für manche Forscher sind der Verlust von
+                            Funktionen oder die Kompromisse [...] nicht mit ihren Forschungszielen
+                            vereinbar, und ihre Projekte sind einfach zu komplex oder für eine
+                            Migration zu SDS ungeeignet.</q>
+                    </note>
+                    <p>
+                        <s xml:id="s11.09">Manche können diesen Kompromiss nicht eingehen.</s>
+                        <s xml:id="s11.10">Für diese Projekte bleibt die Datenzukunft gefährdet.</s>
+                        <s xml:id="s11.11">Das sagen die Autoren offen.</s>
+                        <s xml:id="s11.12">Das Ziel ist die 80/20-Regel: eine einheitliche,
+                            verwaltete Infrastruktur für 80 Prozent der Projekte – nur 20 Prozent
+                            brauchen maßgeschneiderte Lösungen.</s>
+                    </p>
+
+                    <note type="citRef" target="#s11.12" corresp="strange2023:p362"> S. 362: <q
+                            source="#strange2023" corresp="strange2023:p362">Die 80/20-Regel, was
+                            bedeutet, dass wir darauf abzielen, eine einheitliche und verwaltete
+                            Infrastruktur für 80 % der Projekte im Bereich der Digital Humanities
+                            anzubieten.</q> – Fn. 45–46 (Batch-Migration). </note>
+                    <stage type="direction" xml:id="regie11.01"> [Regie: Batch-Migration via
+                        Figshare-Tool ist auf der Folie erwähnt – nur bei Nachfragen erläutern.] </stage>
+
+                </sp>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <!--  Folie 12: Fallstudie Novum Inventorium Sepulchrale    -->
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <div type="slide" xml:id="slide12"
+                n="Folie 12 – Fallstudie: Grave Goods / Novum Inventorium Sepulchrale">
+                <head>Folie 12 – Fallstudie: <title level="m" xml:lang="la">Novum Inventorium
+                        Sepulchrale</title>
+                </head>
+                <note type="timing">ca. 1:15 min</note>
+
+                <sp>
+                    <speaker>Vortragende/r</speaker>
+
+                    <p>
+                        <s xml:id="s12.01">Ich möchte mit einem konkreten Fallbeispiel schließen,
+                            das all diese Prinzipien lebendig macht.</s>
+                        <s xml:id="s12.02">Das <title level="m" xml:lang="la">Novum Inventorium
+                                Sepulchrale</title> – eine Sammlung kentischer und angelsächsischer
+                            Grabbeigaben aus dem <name type="archive">Sonia Hawkes
+                            Archive</name>.</s>
+                    </p>
+
+                    <note type="citRef" target="#s12.01 #s12.02" corresp="strange2023:p363-p364"> S.
+                        363–364: <q source="#strange2023" corresp="strange2023:p363">Das Projekt
+                            ‚Novum Inventorium Sepulchrale – Kentische und angelsächsische
+                            Grabbeigaben im Sonia-Hawkes-Archiv'.</q> Fn. 49. </note>
+                    <p>
+                        <s xml:id="s12.03">Das Projekt hatte ursprünglich eine voll funktionsfähige
+                            Datenbank mit durchsuchbarem Web-Frontend, Tausenden von Bildern und
+                            umfangreichen Metadaten für rund 1.000 Gräber.</s>
+                        <s xml:id="s12.04"><date when="2018">2018</date> ging es auf unbestimmte
+                            Zeit offline.</s>
+                        <s xml:id="s12.05">Was blieb: zwei Metadaten-Tabellen auf einer einzigen
+                            Projektwebseite.</s>
+                        <s xml:id="s12.06">Keine Suche, keine Bilder, kaum Zugang.</s>
+                    </p>
+
+                    <note type="citRef" target="#s12.03 #s12.04 #s12.05 #s12.06"
+                        corresp="strange2023:p363-p364"> S. 363–364: <q source="#strange2023"
+                            corresp="strange2023:p364">Da das Projekt jedoch 2018 auf unbestimmte
+                            Zeit offline ging, blieb lediglich der Zugriff auf zwei
+                            Metadaten-Tabellen auf einer einzigen Projektwebseite.</q>
+                    </note>
+                    <p>
+                        <s xml:id="s12.07"><date when="2021">2021</date> kontaktierte
+                                <persName>Prof. Helena Hamerow</persName> von der <orgName>School of
+                                Archaeology</orgName> das SDS-Team.</s>
+                        <s xml:id="s12.08">Nach den üblichen Schritten – Abstimmung,
+                            Metadaten-Bereinigung, Mapping – war das Projekt innerhalb von circa 6
+                            Arbeitstagen vollständig migriert.</s>
+                    </p>
+
+                    <note type="citRef" target="#s12.07 #s12.08" corresp="strange2023:p364"> S. 364:
+                            <q source="#strange2023" corresp="strange2023:p364">[I]nnerhalb von etwa
+                            6 Tagen vollständig migriert, und die Daten waren wieder offen und
+                            verfügbar.</q>
+                    </note>
+                    <p>
+                        <s xml:id="s12.09">Das Ergebnis: 4.800 Datensätze und über 6.000 Bilddateien
+                            sind wieder offen und verfügbar.</s>
+                    </p>
+
+                    <note type="citRef" target="#s12.09" corresp="strange2023:p364"> S. 364: <q
+                            source="#strange2023" corresp="strange2023:p364">Dieses Projekt, das
+                            Metadaten für ca. 4.800 Datensätze und über 6.000 Bilder umfasst.</q>
+                    </note>
+                    <p>
+                        <s xml:id="s12.10">Und das Urteil von <persName>Prof. Hamerow</persName>
+                            selbst:</s>
+                    </p>
+                    <p>
+                        <s xml:id="s12.11">
+                            <q source="#strange2023" corresp="strange2023:p364">Eine wertvolle,
+                                webbasierte archäologische Ressource, die vor Jahren offline
+                                gegangen war und nun wieder genutzt wird.</q>
+                        </s>
+                    </p>
+
+                    <note type="citRef" target="#s12.11" corresp="strange2023:p364"> S. 364,
+                        wörtliches Zitat <persName>Prof. Helena Hamerow</persName>, Fn. 50. Die
+                        Autoren zitieren diese Aussage als Beleg für den praktischen Erfolg
+                        retroaktiver Nachhaltigkeit. </note>
+                    <p>
+                        <s xml:id="s12.12">Kein großes Versprechen.</s>
+                        <s xml:id="s12.13">Keine Digitalstrategie.</s>
+                        <s xml:id="s12.14">Eine schlichte Feststellung – und gerade deshalb so
+                            überzeugend.</s>
+                    </p>
+
+                </sp>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <!--  Schluss und Diskussion                                 -->
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <div type="slide" xml:id="slide13" n="Schluss und Diskussion">
+                <head>Schluss und Diskussion</head>
+                <note type="timing">ca. 0:30 min</note>
+
+                <sp>
+                    <speaker>Vortragende/r</speaker>
+
+                    <p>
+                        <s xml:id="s13.01">Was lehrt uns die Oxford Case Study? Drei
+                            Beobachtungen.</s>
+                    </p>
+
+                    <note type="citRef" target="#s13.01" corresp="strange2023:p364-p365"> S.
+                        364–365: Fazit-Abschnitt. </note>
+                    <p>
+                        <s xml:id="s13.02">Erstens: Nachhaltigkeit ist keine Frage der Technologie
+                            allein, sondern der Kombination aus Technologie, Prozessen und
+                            Menschen.</s>
+                        <s xml:id="s13.03">SDS ist ein Dienst, kein System.</s>
+                    </p>
+
+                    <note type="citRef" target="#s13.02 #s13.03" corresp="strange2023:p359"> S. 359:
+                            <q source="#strange2023" corresp="strange2023:p359">Digitale
+                            Nachhaltigkeit ist für viele Institutionen ein großes und wachsendes
+                            Thema, dessen Herausforderungen nicht nur technischer Natur sind,
+                            sondern auch mit der kulturellen Akzeptanz des
+                            Forschungsdatenmanagements durch die Forschenden zusammenhängen.</q> Fn.
+                        44. </note>
+                    <p>
+                        <s xml:id="s13.04">Zweitens: Das Finanzierungsmodell ist Teil der
+                            Lösung.</s>
+                        <s xml:id="s13.05">SDS ist als kleine Forschungseinheit eingerichtet –
+                            Forscher können es als Posten in Förderanträgen angeben.</s>
+                        <s xml:id="s13.06">Nachhaltigkeit muss sich selbst tragen können.</s>
+                    </p>
+
+                    <note type="citRef" target="#s13.04 #s13.05 #s13.06" corresp="strange2023:p364">
+                        S. 364: <q source="#strange2023" corresp="strange2023:p364">Der Dienst ist
+                            als kleine Forschungseinrichtung an der Universität eingerichtet, was es
+                            Forschern [...] ermöglicht, SDS als Posten in Forschungsanträgen
+                            anzugeben.</q>
+                    </note>
+                    <p>
+                        <s xml:id="s13.07">Drittens: Der Artikel selbst ist Open Access, CC BY
+                            4.0.</s>
+                        <s xml:id="s13.08">Das ist symptomatisch für einen Ansatz, der Offenheit
+                            nicht nur fordert, sondern vorlebt.</s>
+                    </p>
+
+                    <note type="citRef" target="#s13.07" corresp="strange2023:p348"> Artikelkopf, S.
+                        348: CC BY 4.0-Lizenz (Open Access). – Zur Lock-in-Frage: S. 359,
+                        Ausstiegsstrategie. </note>
+                </sp>
+
+                <stage type="discussion" xml:id="regie13.01"> [Diskussionsfragen: Wie übertragbar
+                    ist das Oxford-Modell auf kleinere Universitäten? Erzeugt die Abhängigkeit von
+                    Figshare eine neue Form von Lock-in? Wer sichert langfristig die Finanzierung
+                    des SDS-Dienstes selbst?] </stage>
+
+            </div>
+
+        </body>
+    </text>
+
+</TEI>
